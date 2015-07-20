@@ -14,7 +14,7 @@ $ npm install ab-stage --save-dev
 
 	require('ab-element');
 
-	// good 2 go
+	// view source for more
 
 ## License
 
