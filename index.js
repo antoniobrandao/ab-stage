@@ -4,44 +4,44 @@ window.stage = {};
 
 
 
-//////		 ######  #### ######## ######## 
-//////		##    ##  ##       ##  ##       
-//////		##        ##      ##   ##       
-//////		 ######   ##     ##    ######   
-//////		      ##  ##    ##     ##       
-//////		##    ##  ##   ##      ##       
-//////		 ######  #### ######## ######## 
+//////     ######  #### ######## ######## 
+//////    ##    ##  ##       ##  ##       
+//////    ##        ##      ##   ##       
+//////     ######   ##     ##    ######   
+//////          ##  ##    ##     ##       
+//////    ##    ##  ##   ##      ##       
+//////     ######  #### ######## ######## 
 
 
 
 window.stage.width = function(use_px) {
-	var w=window,
-		d=document,
-		e=d.documentElement,
-		g=d.getElementsByTagName('body')[0],
-		x=w.innerWidth||e.clientWidth||g.clientWidth;
-		return (use_px ? x + 'px' : x);
+  var w=window,
+    d=document,
+    e=d.documentElement,
+    g=d.getElementsByTagName('body')[0],
+    x=w.innerWidth||e.clientWidth||g.clientWidth;
+    return (use_px ? x + 'px' : x);
 }
 
 window.stage.height = function(use_px) {
-	var w=window,
-		d=document,
-		e=d.documentElement,
-		g=d.getElementsByTagName('body')[0],
-		y=w.innerHeight||e.clientHeight||g.clientHeight;
-		return (use_px ? y + 'px' : y);
+  var w=window,
+    d=document,
+    e=d.documentElement,
+    g=d.getElementsByTagName('body')[0],
+    y=w.innerHeight||e.clientHeight||g.clientHeight;
+    return (use_px ? y + 'px' : y);
 }
 
 
 
 
-//////		 ######  ####  ######   ##    ##    ###    ##        ######  
-//////		##    ##  ##  ##    ##  ###   ##   ## ##   ##       ##    ## 
-//////		##        ##  ##        ####  ##  ##   ##  ##       ##       
-//////		 ######   ##  ##   #### ## ## ## ##     ## ##        ######  
-//////		      ##  ##  ##    ##  ##  #### ######### ##             ## 
-//////		##    ##  ##  ##    ##  ##   ### ##     ## ##       ##    ## 
-//////		 ######  ####  ######   ##    ## ##     ## ########  ######  
+//////     ######  ####  ######   ##    ##    ###    ##        ######  
+//////    ##    ##  ##  ##    ##  ###   ##   ## ##   ##       ##    ## 
+//////    ##        ##  ##        ####  ##  ##   ##  ##       ##       
+//////     ######   ##  ##   #### ## ## ## ##     ## ##        ######  
+//////          ##  ##  ##    ##  ##  #### ######### ##             ## 
+//////    ##    ##  ##  ##    ##  ##   ### ##     ## ##       ##    ## 
+//////     ######  ####  ######   ##    ## ##     ## ########  ######  
 
 
 
@@ -52,94 +52,93 @@ window.stage.signals.bindings = {};
 
 window.stage.addSignal = function( string_key )
 {
-	window.stage.signals[string_key] = new window.signal();
+  window.stage.signals[string_key] = new window.signal();
 }
 
 window.stage.dispatchSignal = function( string_key )
 {
-	window.stage.signals[string_key].dispatch();
+  window.stage.signals[string_key].dispatch();
 }
 
 window.stage.addSignalListener = function( string_key, callBack, context, once )
 {
-	if (!once) {
-		window.stage.signals[string_key].add(callBack, context);
-	} else {
-		window.stage.signals[string_key].addOnce(callBack, context);
-	}
+  if (!window.stage.signals[string_key]) { window.stage.addSignal(string_key); }
+
+  if (!once) { window.stage.signals[string_key].add(callBack, context);
+  } else     { window.stage.signals[string_key].addOnce(callBack, context); }
 }
 
 window.stage.removeSignalListener = function( string_key, callBack )
 {
-	window.stage.signals[string_key].remove(callBack);
+  window.stage.signals[string_key].remove(callBack);
 }
 
 window.stage.removeSignalListenerAll = function( string_key, callBack )
 {
-	window.stage.signals[string_key].removeAll();
+  window.stage.signals[string_key].removeAll();
 }
 
 window.stage.removeSignal = function( string_key )
 {
-	window.stage.signals[string_key].removeAll();
-	window.stage.signals[string_key] = null;
+  window.stage.signals[string_key].removeAll();
+  window.stage.signals[string_key] = null;
 }
 
 
 
-//////		########  ########  ######  #### ######## ######## 
-//////		##     ## ##       ##    ##  ##       ##  ##       
-//////		##     ## ##       ##        ##      ##   ##       
-//////		########  ######    ######   ##     ##    ######   
-//////		##   ##   ##             ##  ##    ##     ##       
-//////		##    ##  ##       ##    ##  ##   ##      ##       
-//////		##     ## ########  ######  #### ######## ######## 
+//////    ########  ########  ######  #### ######## ######## 
+//////    ##     ## ##       ##    ##  ##       ##  ##       
+//////    ##     ## ##       ##        ##      ##   ##       
+//////    ########  ######    ######   ##     ##    ######   
+//////    ##   ##   ##             ##  ##    ##     ##       
+//////    ##    ##  ##       ##    ##  ##   ##      ##       
+//////    ##     ## ########  ######  #### ######## ######## 
 
 
 
 window.stage.onResize = function( callBack )
 {
-	if(window.attachEvent) 			 	{window.attachEvent('onresize', callBack);
-	} else if(window.addEventListener) 	{window.addEventListener('resize', callBack, true);
-	} else { 							//The browser does not support Javascript event binding
-	}
+  if(window.attachEvent)        {window.attachEvent('onresize', callBack);
+  } else if(window.addEventListener)  {window.addEventListener('resize', callBack, true);
+  } else {              //The browser does not support Javascript event binding
+  }
 }
 
 window.stage.removeOnResize = function(callBack)
 {
-	if(window.detachEvent)  				{ window.detachEvent('onresize', 		callBack);
-	} else if(window.removeEventListener) 	{ window.removeEventListener('resize', 	callBack);
-	} else { 								//The browser does not support Javascript event binding
-	}
+  if(window.detachEvent)          { window.detachEvent('onresize',    callBack);
+  } else if(window.removeEventListener)   { window.removeEventListener('resize',  callBack);
+  } else {                //The browser does not support Javascript event binding
+  }
 }
 
 
 
-//////		########  ########  #######  ##     ## ########  ######  ######## 
-//////		##     ## ##       ##     ## ##     ## ##       ##    ##    ##    
-//////		##     ## ##       ##     ## ##     ## ##       ##          ##    
-//////		########  ######   ##     ## ##     ## ######    ######     ##    
-//////		##   ##   ##       ##  ## ## ##     ## ##             ##    ##    
-//////		##    ##  ##       ##    ##  ##     ## ##       ##    ##    ##    
-//////		##     ## ########  ##### ##  #######  ########  ######     ##    
-//////		
-//////		
-//////		   ###    ##    ## #### ##     ##    ###    ######## ####  #######  ##    ## 
-//////		  ## ##   ###   ##  ##  ###   ###   ## ##      ##     ##  ##     ## ###   ## 
-//////		 ##   ##  ####  ##  ##  #### ####  ##   ##     ##     ##  ##     ## ####  ## 
-//////		##     ## ## ## ##  ##  ## ### ## ##     ##    ##     ##  ##     ## ## ## ## 
-//////		######### ##  ####  ##  ##     ## #########    ##     ##  ##     ## ##  #### 
-//////		##     ## ##   ###  ##  ##     ## ##     ##    ##     ##  ##     ## ##   ### 
-//////		##     ## ##    ## #### ##     ## ##     ##    ##    ####  #######  ##    ## 
-//////		
-//////		
-//////		######## ########     ###    ##     ## ######## 
-//////		##       ##     ##   ## ##   ###   ### ##       
-//////		##       ##     ##  ##   ##  #### #### ##       
-//////		######   ########  ##     ## ## ### ## ######   
-//////		##       ##   ##   ######### ##     ## ##       
-//////		##       ##    ##  ##     ## ##     ## ##       
-//////		##       ##     ## ##     ## ##     ## ######## 
+//////    ########  ########  #######  ##     ## ########  ######  ######## 
+//////    ##     ## ##       ##     ## ##     ## ##       ##    ##    ##    
+//////    ##     ## ##       ##     ## ##     ## ##       ##          ##    
+//////    ########  ######   ##     ## ##     ## ######    ######     ##    
+//////    ##   ##   ##       ##  ## ## ##     ## ##             ##    ##    
+//////    ##    ##  ##       ##    ##  ##     ## ##       ##    ##    ##    
+//////    ##     ## ########  ##### ##  #######  ########  ######     ##    
+//////    
+//////    
+//////       ###    ##    ## #### ##     ##    ###    ######## ####  #######  ##    ## 
+//////      ## ##   ###   ##  ##  ###   ###   ## ##      ##     ##  ##     ## ###   ## 
+//////     ##   ##  ####  ##  ##  #### ####  ##   ##     ##     ##  ##     ## ####  ## 
+//////    ##     ## ## ## ##  ##  ## ### ## ##     ##    ##     ##  ##     ## ## ## ## 
+//////    ######### ##  ####  ##  ##     ## #########    ##     ##  ##     ## ##  #### 
+//////    ##     ## ##   ###  ##  ##     ## ##     ##    ##     ##  ##     ## ##   ### 
+//////    ##     ## ##    ## #### ##     ## ##     ##    ##    ####  #######  ##    ## 
+//////    
+//////    
+//////    ######## ########     ###    ##     ## ######## 
+//////    ##       ##     ##   ## ##   ###   ### ##       
+//////    ##       ##     ##  ##   ##  #### #### ##       
+//////    ######   ########  ##     ## ## ### ## ######   
+//////    ##       ##   ##   ######### ##     ## ##       
+//////    ##       ##    ##  ##     ## ##     ## ##       
+//////    ##       ##     ## ##     ## ##     ## ######## 
 
 
 
@@ -170,13 +169,13 @@ window.stage.removeOnResize = function(callBack)
 
 
 
-//////		 ######   ######  ########   #######  ##       ##          ##     ## ######## #### ##        ######  
-//////		##    ## ##    ## ##     ## ##     ## ##       ##          ##     ##    ##     ##  ##       ##    ## 
-//////		##       ##       ##     ## ##     ## ##       ##          ##     ##    ##     ##  ##       ##       
-//////		 ######  ##       ########  ##     ## ##       ##          ##     ##    ##     ##  ##        ######  
-//////		      ## ##       ##   ##   ##     ## ##       ##          ##     ##    ##     ##  ##             ## 
-//////		##    ## ##    ## ##    ##  ##     ## ##       ##          ##     ##    ##     ##  ##       ##    ## 
-//////		 ######   ######  ##     ##  #######  ######## ########     #######     ##    #### ########  ######  
+//////     ######   ######  ########   #######  ##       ##          ##     ## ######## #### ##        ######  
+//////    ##    ## ##    ## ##     ## ##     ## ##       ##          ##     ##    ##     ##  ##       ##    ## 
+//////    ##       ##       ##     ## ##     ## ##       ##          ##     ##    ##     ##  ##       ##       
+//////     ######  ##       ########  ##     ## ##       ##          ##     ##    ##     ##  ##        ######  
+//////          ## ##       ##   ##   ##     ## ##       ##          ##     ##    ##     ##  ##             ## 
+//////    ##    ## ##    ## ##    ##  ##     ## ##       ##          ##     ##    ##     ##  ##       ##    ## 
+//////     ######   ######  ##     ##  #######  ######## ########     #######     ##    #### ########  ######  
 
 
 
@@ -208,23 +207,23 @@ var wheel = function(e) {
 
 window.stage.disableScroll = function()
 {
-	if (window.addEventListener) {
-		window.addEventListener('DOMMouseScroll', wheel, false);
-	}
+  if (window.addEventListener) {
+    window.addEventListener('DOMMouseScroll', wheel, false);
+  }
 
-	window.onmousewheel = document.onmousewheel = wheel;
-	document.onkeydown = keydown;
-	scroll_lock = true;
+  window.onmousewheel = document.onmousewheel = wheel;
+  document.onkeydown = keydown;
+  scroll_lock = true;
 }
 
 window.stage.enableScroll = function()
 {
-	if (window.removeEventListener) {
-		window.removeEventListener('DOMMouseScroll', wheel, false);
-	}
+  if (window.removeEventListener) {
+    window.removeEventListener('DOMMouseScroll', wheel, false);
+  }
 
-	window.onmousewheel = document.onmousewheel = document.onkeydown = null;  
-	scroll_lock = false;
+  window.onmousewheel = document.onmousewheel = document.onkeydown = null;  
+  scroll_lock = false;
 }
 
 window.stage.getScrollbarWidth = function() 
@@ -256,13 +255,13 @@ window.stage.getScrollbarWidth = function()
 
 
 
-//////		########   #######     ###    ########  ##     ##    ###    ########  
-//////		##     ## ##     ##   ## ##   ##     ## ###   ###   ## ##   ##     ## 
-//////		##     ## ##     ##  ##   ##  ##     ## #### ####  ##   ##  ##     ## 
-//////		########  ##     ## ##     ## ##     ## ## ### ## ##     ## ########  
-//////		##   ##   ##     ## ######### ##     ## ##     ## ######### ##        
-//////		##    ##  ##     ## ##     ## ##     ## ##     ## ##     ## ##        
-//////		##     ##  #######  ##     ## ########  ##     ## ##     ## ##        
+//////    ########   #######     ###    ########  ##     ##    ###    ########  
+//////    ##     ## ##     ##   ## ##   ##     ## ###   ###   ## ##   ##     ## 
+//////    ##     ## ##     ##  ##   ##  ##     ## #### ####  ##   ##  ##     ## 
+//////    ########  ##     ## ##     ## ##     ## ## ### ## ##     ## ########  
+//////    ##   ##   ##     ## ######### ##     ## ##     ## ######### ##        
+//////    ##    ##  ##     ## ##     ## ##     ## ##     ## ##     ## ##        
+//////    ##     ##  #######  ##     ## ########  ##     ## ##     ## ##        
 
 // UI BLOCKER
 // CREATE APP LEVELS

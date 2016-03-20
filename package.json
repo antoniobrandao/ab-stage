@@ -1,6 +1,6 @@
 {
   "name": "ab-stage",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Flash-like handling of viewport in HTML5 and some other goodies",
   "main": "index.js",
   "keywords": [

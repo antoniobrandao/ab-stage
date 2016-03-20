@@ -12,7 +12,7 @@ $ npm install ab-stage --save-dev
 
 ## Usage
 
-	require('ab-element');
+	require('ab-stage');
 
 	// view source for more
 
