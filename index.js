@@ -50,17 +50,19 @@ window.stage.signals = {};
 window.stage.signals.bindings = {};
 
 
-window.stage.addSignal = function( string_key )
+window.stage.addSignal = function(string_key)
 {
   window.stage.signals[string_key] = new window.signal();
 }
 
-window.stage.dispatchSignal = function( string_key )
+window.stage.dispatchSignal = function(string_key)
 {
+  if (!window.stage.signals[string_key]) { window.stage.addSignal(string_key); }
+
   window.stage.signals[string_key].dispatch();
 }
 
-window.stage.addSignalListener = function( string_key, callBack, context, once )
+window.stage.addSignalListener = function(string_key, callBack, context, once)
 {
   if (!window.stage.signals[string_key]) { window.stage.addSignal(string_key); }
 
@@ -68,20 +70,26 @@ window.stage.addSignalListener = function( string_key, callBack, context, once )
   } else     { window.stage.signals[string_key].addOnce(callBack, context); }
 }
 
-window.stage.removeSignalListener = function( string_key, callBack )
+window.stage.removeSignalListener = function(string_key, callBack)
 {
-  window.stage.signals[string_key].remove(callBack);
+  if (window.stage.signals[string_key]) {
+    window.stage.signals[string_key].remove(callBack);
+  }
 }
 
-window.stage.removeSignalListenerAll = function( string_key, callBack )
+window.stage.removeSignalListenerAll = function(string_key, callBack)
 {
-  window.stage.signals[string_key].removeAll();
+  if (window.stage.signals[string_key]) {
+    window.stage.signals[string_key].removeAll();
+  }
 }
 
-window.stage.removeSignal = function( string_key )
+window.stage.removeSignal = function(string_key)
 {
-  window.stage.signals[string_key].removeAll();
-  window.stage.signals[string_key] = null;
+  if (window.stage.signals[string_key]) {
+    window.stage.signals[string_key].removeAll();
+    window.stage.signals[string_key] = null;
+  }
 }
 
 
@@ -96,7 +104,7 @@ window.stage.removeSignal = function( string_key )
 
 
 
-window.stage.onResize = function( callBack )
+window.stage.onResize = function(callBack)
 {
   if(window.attachEvent)        {window.attachEvent('onresize', callBack);
   } else if(window.addEventListener)  {window.addEventListener('resize', callBack, true);
